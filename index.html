@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ping Pong Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            overflow: hidden;
+            background-color: black;
+        }
+
+        #ball {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+        }
+
+        #paddle {
+            position: absolute;
+            width: 10px;
+            height: 80px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body >
+    <h1>Africa Artificial Intelligence BootCamp First Assignment</h1>
+    <div id="ball"></div>
+    <div id="paddle"></div>
+
+    <script>
+        const ball = document.getElementById('ball');
+        const paddle = document.getElementById('paddle');
+
+        let ballX = 250;
+        let ballY = 200;
+        let ballSpeedX = 5;
+        let ballSpeedY = 5;
+        let paddleY = 150;
+
+        function moveBall() {
+            ballX += ballSpeedX;
+            ballY += ballSpeedY;
+
+            if (ballX + 20 > window.innerWidth || ballX < 0) {
+                ballSpeedX *= -1;
+            }
+
+            if (ballY + 20 > window.innerHeight || ballY < 0) {
+                ballSpeedY *= -1;
+            }
+
+            if (ballX < 20 && ballY > paddleY && ballY < paddleY + 80) {
+                ballSpeedX *= -1;
+            }
+
+            ball.style.left = ballX + 'px';
+            ball.style.top = ballY + 'px';
+        }
+
+        function movePaddle(event) {
+            paddleY = event.clientY - 40;
+            paddle.style.top = paddleY + 'px';
+        }
+
+        setInterval(moveBall, 10);
+        window.addEventListener('mousemove', movePaddle);
+    </script>
+</body>
+
+</html>
